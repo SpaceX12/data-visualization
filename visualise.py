@@ -1,13 +1,9 @@
-import pandas as pa
-import plotly.express as px
+import pandas as pd
 import csv
+import plotly.express as px
 
-df = pa.read_csv('data.csv')
+df = pd.read_csv("data.csv")
+mean = df.groupby(["student_id", "level"], as_index=False)["attempt"].mean()
+fig = px.scatter(mean, x="student_id", y="level", size="attempt", color="attempt")
 
-fig = px.scatter(df, 
-                x = df.groupby('student_id')['attempt'],
-                y = ['Level 1', 'Level 2', 'Level 3', 'Level 4'],
-                size= 'attempt', 
-                color= 'attempt',
-                size_max = 4)
 fig.show()
